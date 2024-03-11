@@ -19,6 +19,8 @@
     <None Remove="Dto\" />
     <None Remove="Entity\" />
     <None Remove="Utility\" />
+    <None Remove="Controllers\ApiControllers\" />
+    <None Remove="Controllers\ViewControllers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Context\" />
@@ -31,6 +33,8 @@
     <Folder Include="Dto\" />
     <Folder Include="Entity\" />
     <Folder Include="Utility\" />
+    <Folder Include="Controllers\ApiControllers\" />
+    <Folder Include="Controllers\ViewControllers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />

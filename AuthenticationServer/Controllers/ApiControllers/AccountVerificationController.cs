@@ -21,7 +21,7 @@ namespace AuthenticationServer.Controllers
         public IActionResult VerifyAccount(string token)
         {
             authentication.VerifyAccount(token);
-            return Ok();
+            return RedirectToAction("AccountVerified","Home");
         }
     }
 }

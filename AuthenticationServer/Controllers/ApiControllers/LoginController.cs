@@ -23,13 +23,11 @@ namespace AuthServer.Controllers
             service = _service;
             config = _config;
         }
-
     
 
         [HttpPost("basic")]
         public IActionResult Login()
         {
-            
             bool isAuthPresent = Request.Headers.TryGetValue("Authorization", out var credentials);
             if(isAuthPresent)
             {
@@ -38,14 +36,7 @@ namespace AuthServer.Controllers
                 return Ok(responseDto);
                 
             }
-
-            //AuthenticationModel model = new AuthenticationModel("","");
-            //if (service.Login(model))
-            //{
-            //    return RedirectToAction("Index", "Home");
-            //}
-            JwtToken toke = new JwtToken("", "");
-            return Ok(toke);
+            return Ok(new AuthResponseDto("", "", "Authorization missing."));
         }
     }
 }
