@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AuthenticationServer.Models;
-using AuthenticationServer.Services;
+﻿using AuthenticationServer.Services;
+using AuthServer.Dto;
+using AuthServer.Models;
+using AuthServer.Utility;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,17 +26,26 @@ namespace AuthServer.Controllers
 
     
 
-        [HttpPost("apiname", Name = "login")]
+        [HttpPost("basic")]
         public IActionResult Login()
         {
-            var request = Request;
-            Console.WriteLine(request.Headers);
+            
+            bool isAuthPresent = Request.Headers.TryGetValue("Authorization", out var credentials);
+            if(isAuthPresent)
+            {
+                AuthResponseDto responseDto =  service.Login(credentials[0]);
+
+                return Ok(responseDto);
+                
+            }
+
             //AuthenticationModel model = new AuthenticationModel("","");
             //if (service.Login(model))
             //{
             //    return RedirectToAction("Index", "Home");
             //}
-            return Ok();
+            JwtToken toke = new JwtToken("", "");
+            return Ok(toke);
         }
     }
 }

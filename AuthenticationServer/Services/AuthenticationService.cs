@@ -1,72 +1,74 @@
-﻿using System.Security.Claims;
+﻿using System.Net;
+using System.Security.Claims;
 using AuthenticationServer.Models;
 using AuthenticationServer.Repository;
+using AuthServer.Dto;
 using AuthServer.Entity;
 using AuthServer.Models;
 using AuthServer.Repository;
 using AuthServer.Services.JwtTokenService;
+using AuthServer.Utility;
 
 namespace AuthenticationServer.Services
 {
 	public class AuthenticationService : IAuthenticationService
 	{
-        private readonly UserRepository repository;
+        private readonly UserRepository userRepository;
         private readonly AccessTokenRepository tokenRepository;
         private readonly AccountVerificationRepository accountVerificationRepository;
         private readonly IEmailService emailService;
 
 		public AuthenticationService(UserRepository _repository, AccountVerificationRepository _accountVerificationRepo, IEmailService _emailService, AccessTokenRepository _tokenRepo)
 		{
-            repository = _repository;
+            userRepository = _repository;
             accountVerificationRepository = _accountVerificationRepo;
             emailService = _emailService;
             tokenRepository = _tokenRepo;
 		}
 
-        
-
-        public bool Login(AuthenticationModel model)
+        public AuthResponseDto Login(string BasicEncodedAuth)
         {
-            var user = repository.GetByEmail(model.Email);
-            if( user != null && EncryptionService.Verify(model.Password, user.Password))
+
+            var logindto = GetLoginDto(BasicEncodedAuth);
+
+            var user = userRepository.GetByEmail(logindto.Email);
+
+            if( user != null && EncryptionService.Verify(logindto.Password, user.Password))
             {
-                var token = JwtGenerator.CreateToken(model);
-                AccessToken accessToken = new AccessToken(model.Email, token);
+                var token = JwtGenerator.CreateToken(logindto.Email);
+                AccessToken accessToken = new(logindto.Email, token);
                 tokenRepository.Add(accessToken);
-                return true;
+                return new AuthResponseDto(logindto.Email, token, "Success");
             }
-            return false;
+            return new AuthResponseDto(logindto.Email, "", "Error");
         }
 
-        public bool Register(AuthenticationModel model)
+        public AuthResponseDto Register(UserDto dto)
         {
             try {
-                model.Password = EncryptionService.Encrypt(model.Password);
 
-                User user = new(model.Email, model.Password);
+                if(userRepository.CheckUserExists(dto.Email))
+                {
+                    return new AuthResponseDto(dto.Email, "", "User already Exist.");
+                }
 
-                var token = JwtGenerator.CreateToken(model);
+                dto.Password = EncryptionService.Encrypt(dto.Password);
+                var token = JwtGenerator.CreateToken(dto.Email);
 
-                AccountVerification accountVerification = new AccountVerification(model.Email, token);
+                User user = new(dto);
+                AccountVerification accountVerification = new(dto.Email, token);
 
-                repository.Add(user);
+                userRepository.Add(user);
                 accountVerificationRepository.Add(accountVerification);
 
-                MailData mailData = new MailData();
-                mailData.EmailToId = model.Email;
-                mailData.EmailToName = model.Email;
-                mailData.EmailToSubject = "Account Verification";
-                mailData.VerificationURL = "https://localhost:7012/api/verifyaccount?token=" + token;
-
-                emailService.SendEmail(mailData);
-
-                return true;
+                SendEmail(dto, token);
 
             }catch(Exception e)
             {
                 Console.WriteLine("Error while registering user: " + e);
-                return false;
             }
+
+            return new AuthResponseDto(dto.Email, "", "Success");
         }
 
         public void VerifyAccount(string token)
@@ -76,10 +78,32 @@ namespace AuthenticationServer.Services
             AccountVerification account = accountVerificationRepository.GetActiveTokenByEmail(email);
             if(account.TokenValid && account.Token.Equals(token))
             {
-                repository.ValidateUserByAccount(email);
+                userRepository.ValidateUserByAccount(email);
                 accountVerificationRepository.UpdateTokenStatusByEmail(email);
             }
         }
+
+
+        private LoginDto GetLoginDto(string encodedAuth)
+        {
+            var encoded = encodedAuth.Replace("Basic ", "");
+            var decodedAuth = Base64Helper.DecodeBase64(encoded);
+            var creds = decodedAuth.Split(":");
+            LoginDto auth = new(creds[0], creds[1]);
+
+            return auth;
+        }
+
+        private void SendEmail(UserDto dto, string token)
+        {
+            MailData mailData = new MailData();
+            mailData.EmailToId = dto.Email;
+            mailData.EmailToName = dto.Email;
+            mailData.EmailToSubject = "Account Verification";
+            mailData.VerificationURL = "https://localhost:7012/api/verifyaccount?token=" + token;
+            emailService.SendEmail(mailData);
+        }
+
     }
 }
 

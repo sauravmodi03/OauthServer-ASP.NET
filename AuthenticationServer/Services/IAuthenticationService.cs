@@ -1,13 +1,14 @@
 ﻿using System;
 using AuthenticationServer.Models;
+using AuthServer.Dto;
 
 namespace AuthenticationServer.Services
 {
 	public interface IAuthenticationService
 	{
-		bool Login(AuthenticationModel modal);
+        AuthResponseDto Login(string modal);
 
-        bool Register(AuthenticationModel model);
+        AuthResponseDto Register(UserDto model);
 
         void VerifyAccount(string token);
 

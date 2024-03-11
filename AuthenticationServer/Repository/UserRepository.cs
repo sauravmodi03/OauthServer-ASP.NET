@@ -34,6 +34,11 @@ namespace AuthenticationServer.Services
             entity.EmailVerified = true;
             context.SaveChanges();
         }
+
+        public bool CheckUserExists(string email)
+        {
+            return context.Set<User>().Any(u => u.Email.Equals(email));
+        }
     }
 }
 

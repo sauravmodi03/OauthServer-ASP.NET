@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 using AuthenticationServer.Models;
+using AuthServer.Dto;
 
 namespace AuthServer.Services.JwtTokenService
 {
@@ -13,11 +14,11 @@ namespace AuthServer.Services.JwtTokenService
 		{
 		}
 
-        public static string CreateToken(AuthenticationModel user)
+        public static string CreateToken(string email)
         {
             var expiration = DateTime.UtcNow.AddMinutes(10);
             var token = CreateJwtToken(
-                CreateClaims(user),
+                CreateClaims(email),
                 CreateSigningCredentials(),
                 expiration
             );
@@ -38,7 +39,7 @@ namespace AuthServer.Services.JwtTokenService
             signingCredentials: credentials
         );
 
-        private static List<Claim> CreateClaims(AuthenticationModel user)
+        private static List<Claim> CreateClaims(string email)
         {
             //not understood.
             try
@@ -47,7 +48,7 @@ namespace AuthServer.Services.JwtTokenService
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()),
-                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.Email, email),
             };
 
                 return claims;

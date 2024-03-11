@@ -14,7 +14,6 @@ namespace AuthenticationServer.Models
         public string Email { get; set; }
 		public string Token { get; set; }
 		public long CreatedAt { get; } = DateTime.Now.Ticks;
-        public long ExpireAt { get; } = DateTime.Now.AddMinutes(1).Ticks;
         public bool TokenValid { get; set; } = true;
 
 		public AccountVerification(string Email, string Token)

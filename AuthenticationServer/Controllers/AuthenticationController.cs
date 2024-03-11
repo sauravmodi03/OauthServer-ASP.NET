@@ -38,14 +38,14 @@ namespace AuthenticationServer.Controllers
         //}
 
        
-        public IActionResult Register(AuthenticationModel model)
-        {
-            if (service.Register(model))
-            {
-                return RedirectToAction("Index", "Home");
-            }
-            return RedirectToAction("Fail");
-        }
+        //public IActionResult Register(AuthenticationModel model)
+        //{
+        //    if (service.Register(model))
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    return RedirectToAction("Fail");
+        //}
 
         public IActionResult Success()
         {

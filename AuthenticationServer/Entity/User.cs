@@ -1,8 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using AuthenticationServer.Models;
-using Microsoft.EntityFrameworkCore;
+using AuthServer.Dto;
 
 namespace AuthenticationServer
 {
@@ -12,27 +11,32 @@ namespace AuthenticationServer
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
-
-		public string Email { get; set; }
-
+        public string FirstName { get; set; }
+		public string LastName { get; set; }
+        public string Email { get; set; }
 		public string Password { get; set; }
-
 		public bool EmailVerified { get; set; } = false;
-
 		public string Role { get; set; } = "ROLE_USER";
 		
 		public User()
 		{
-			Email = "";
-			Password = "";
 		}
 
-        public User(string _Email, string _Password)
+        public User(string firstName, string lastName, string email, string password)
         {
-			this.Email = _Email;
-			this.Password = _Password;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Password = password;
         }
-        
+
+        public User(UserDto dto)
+        {
+            FirstName = dto.FirstName;
+            LastName = dto.LastName;
+            Email = dto.Email;
+            Password = dto.Password;
+        }
     }
 }
 
