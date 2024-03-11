@@ -10,11 +10,11 @@ namespace AuthServer.Entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-		public string? Email { get; set; }
-		public string? Token { get; set; }
+		public string Email { get; set; }
+		public string Token { get; set; }
 		public bool TokenValid { get; set; } = true;
 
-        public AccessToken(string? email, string? token)
+        public AccessToken(string email, string token)
         {
             Email = email;
             Token = token;

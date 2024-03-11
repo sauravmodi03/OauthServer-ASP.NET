@@ -25,7 +25,7 @@ namespace AuthenticationServer.Services
 
         public User GetByEmail(string Email)
         {
-            return context.Set<User>().First(u => u.Email.Equals(Email));
+            return context.Set<User>().First(u => u.Email!.Equals(Email));
         }
 
         public void ValidateUserByAccount(string Email)
@@ -37,7 +37,7 @@ namespace AuthenticationServer.Services
 
         public bool CheckUserExists(string email)
         {
-            return context.Set<User>().Any(u => u.Email.Equals(email));
+            return context.Set<User>().Any(u => u.Email!.Equals(email));
         }
     }
 }

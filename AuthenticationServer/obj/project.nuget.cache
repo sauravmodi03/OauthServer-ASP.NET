@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XVKNOA4hyPy8CfEr95sy5ebJfchZ/P2Cex0C0Fisso59diE+j1NpHlvyc+A4rctMM9qQeU1qIpG4VSHb+j99kQ==",
+  "dgSpecHash": "iOWUeCqSPrWQJGcWvC8Qw46ULwt107BmVLGcP8R534WDvLO1Lq0nPPljF11nLpFgd+lSzr7/ueH6X8z1v0pKgg==",
   "success": true,
   "projectFilePath": "/Users/sauravmodi/Workshop/OauthServer-ASP.NET/AuthenticationServer/AuthServer.csproj",
   "expectedPackageFiles": [
@@ -8,10 +8,6 @@
     "/Users/sauravmodi/.nuget/packages/bouncycastle.cryptography/2.3.0/bouncycastle.cryptography.2.3.0.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/mailkit/4.4.0/mailkit.4.4.0.nupkg.sha512",
-    "/Users/sauravmodi/.nuget/packages/microsoft.aspnet.cors/5.3.0/microsoft.aspnet.cors.5.3.0.nupkg.sha512",
-    "/Users/sauravmodi/.nuget/packages/microsoft.aspnet.webapi.client/6.0.0/microsoft.aspnet.webapi.client.6.0.0.nupkg.sha512",
-    "/Users/sauravmodi/.nuget/packages/microsoft.aspnet.webapi.core/5.3.0/microsoft.aspnet.webapi.core.5.3.0.nupkg.sha512",
-    "/Users/sauravmodi/.nuget/packages/microsoft.aspnet.webapi.cors/5.3.0/microsoft.aspnet.webapi.cors.5.3.0.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/microsoft.aspnetcore.authentication.core/2.2.0/microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/7.0.16/microsoft.aspnetcore.authentication.jwtbearer.7.0.16.nupkg.sha512",
@@ -59,8 +55,6 @@
     "/Users/sauravmodi/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/mimekit/4.4.0/mimekit.4.4.0.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/mono.texttemplating/2.2.1/mono.texttemplating.2.2.1.nupkg.sha512",
-    "/Users/sauravmodi/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
-    "/Users/sauravmodi/.nuget/packages/newtonsoft.json.bson/1.0.2/newtonsoft.json.bson.1.0.2.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/npgsql/7.0.6/npgsql.7.0.6.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/npgsql.entityframeworkcore.postgresql/7.0.11/npgsql.entityframeworkcore.postgresql.7.0.11.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/securetokengeneratr/1.0.1/securetokengeneratr.1.0.1.nupkg.sha512",
@@ -72,44 +66,12 @@
     "/Users/sauravmodi/.nuget/packages/system.diagnostics.diagnosticsource/4.5.0/system.diagnostics.diagnosticsource.4.5.0.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/system.formats.asn1/8.0.0/system.formats.asn1.8.0.0.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/system.identitymodel.tokens.jwt/7.4.0/system.identitymodel.tokens.jwt.7.4.0.nupkg.sha512",
-    "/Users/sauravmodi/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/system.security.cryptography.pkcs/8.0.0/system.security.cryptography.pkcs.8.0.0.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/system.text.encoding.codepages/8.0.0/system.text.encoding.codepages.8.0.0.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/system.text.encodings.web/7.0.0/system.text.encodings.web.7.0.0.nupkg.sha512",
     "/Users/sauravmodi/.nuget/packages/system.text.json/7.0.0/system.text.json.7.0.0.nupkg.sha512",
-    "/Users/sauravmodi/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    "/Users/sauravmodi/.nuget/packages/system.threading.tasks.extensions/4.5.1/system.threading.tasks.extensions.4.5.1.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Cors 5.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.Cors",
-      "targetGraphs": [
-        "net7.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebApi.Core 5.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.WebApi.Core",
-      "targetGraphs": [
-        "net7.0"
-      ]
-    },
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.WebApi.Cors 5.3.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net7.0'. This package may not be fully compatible with your project.",
-      "libraryId": "Microsoft.AspNet.WebApi.Cors",
-      "targetGraphs": [
-        "net7.0"
-      ]
-    }
-  ]
+  "logs": []
 }

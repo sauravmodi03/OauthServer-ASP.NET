@@ -66,7 +66,7 @@ namespace AuthServer.Services.JwtTokenService
 
             return new SigningCredentials(
                 new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(symmetricSecurityKey)
+                    Encoding.UTF8.GetBytes(symmetricSecurityKey!)
                 ),
                 SecurityAlgorithms.HmacSha256
             );

@@ -31,7 +31,7 @@ namespace AuthServer.Controllers
             bool isAuthPresent = Request.Headers.TryGetValue("Authorization", out var credentials);
             if(isAuthPresent)
             {
-                AuthResponseDto responseDto =  service.Login(credentials[0]);
+                AuthResponseDto responseDto =  service.Login(credentials[0]!);
 
                 return Ok(responseDto);
                 

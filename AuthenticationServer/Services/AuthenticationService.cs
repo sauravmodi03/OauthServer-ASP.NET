@@ -33,7 +33,7 @@ namespace AuthenticationServer.Services
 
             var user = userRepository.GetByEmail(logindto.Email);
 
-            if( user != null && EncryptionService.Verify(logindto.Password, user.Password))
+            if( user != null && EncryptionService.Verify(logindto.Password, user.Password!))
             {
                 var token = JwtGenerator.CreateToken(logindto.Email);
                 AccessToken accessToken = new(logindto.Email, token);

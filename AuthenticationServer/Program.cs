@@ -42,7 +42,7 @@ builder.Services.Configure<MailSettings>(mailSetting);
 
 //Jwt configuration starts here
 var jwtIssuer = builder.Configuration.GetSection("Jwt:Issuer").Get<string>();
-var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>();
+var jwtKey = builder.Configuration.GetSection("Jwt:Key").Get<string>()!;
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
  .AddJwtBearer(options =>
