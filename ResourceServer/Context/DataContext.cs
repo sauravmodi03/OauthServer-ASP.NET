@@ -1,9 +1,8 @@
 ﻿
-using AuthenticationServer.Models;
-using AuthServer.Entity;
 using Microsoft.EntityFrameworkCore;
+using ResourceServer.Entity;
 
-namespace AuthenticationServer
+namespace ResourceServer
 {
 
     public class DataContext : DbContext
@@ -18,7 +17,7 @@ namespace AuthenticationServer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            string connectionString = "User ID=postgres;Password=root;Host=localhost;Port=5432;Database=postgres;Pooling=true;";
+            string connectionString = "User ID=postgres;Password=root;Host=localhost;Port=5432;Database=postgres;Pooling=true;Connection Lifetime=0;";
             optionsBuilder.UseNpgsql(connectionString);
             base.OnConfiguring(optionsBuilder);
         }
@@ -28,9 +27,6 @@ namespace AuthenticationServer
             modelBuilder.UseSerialColumns();
         }
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<AccountVerification> AccountVerifications { get; set; }
-        public DbSet<AccessToken> AccessTokens { get; set; }
         public DbSet<Todo> Todos { get; set; }
     }
 }

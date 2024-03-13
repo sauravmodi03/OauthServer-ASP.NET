@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 using ResourceServer.Models;
 
 namespace ResourceServer.Services
@@ -8,29 +10,24 @@ namespace ResourceServer.Services
 	public class JwtService
 	{
 
-		private static readonly string Host = "https://localhost:7012/";
-		private static readonly string EndPoint = "/api/get/active/token";
-		private static readonly string URLParameter = "?email=";
+		private readonly string Host = "https://localhost:7012";
+		private readonly string EndPoint = "/api/JwtToken/get/active/token";
+		private readonly string URLParameter = "?email=";
 
         public JwtService()
 		{
 		}
 
-		static List<JwtToken> GetJwtForUser(string Email)
+		public async Task<JwtToken> GetActiveTokenFromAuthServer(string Email)
 		{
 			HttpClient client = new HttpClient();
-			client.BaseAddress = new Uri(Host + EndPoint);
 
-			client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-			HttpResponseMessage httpResponseMessage = client.GetAsync(URLParameter + Email).Result;
-			if(httpResponseMessage.IsSuccessStatusCode)
-			{
-                List<JwtToken> listTokens = httpResponseMessage.Content.ReadFromJsonAsync<List<JwtToken>>().Result;
-
-				return listTokens;
-			}
-			return null;
+			var response = await client.GetStringAsync(Host + EndPoint + URLParameter + Email);
+                //string apiResponse = await response.Content.ReadAsStringAsync();
+            var jwtToken = JsonConvert.DeserializeObject<JwtToken>(response.ToString()!);
+			return jwtToken!;
+			
+			
 		}
 	}
 }

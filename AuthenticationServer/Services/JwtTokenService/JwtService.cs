@@ -13,6 +13,13 @@ namespace AuthServer.Services.JwtTokenService
             this.tokenRepository = tokenRepository;
         }
 
+        public JwtToken GetActiveTokenByEmail(string Email)
+        {
+            var token = tokenRepository.GetActiveTokenByEmail(Email);
+           
+            return new JwtToken(token.Email, token.Token);
+        }
+
         public List<JwtToken> GetTokensByEmail(string Email)
         {
             var tokens = tokenRepository.GetAllByEmail(Email);

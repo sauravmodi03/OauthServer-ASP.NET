@@ -39,6 +39,7 @@ namespace AuthenticationServer.Services
         {
             return context.Set<User>().Any(u => u.Email!.Equals(email));
         }
+
     }
 }
 

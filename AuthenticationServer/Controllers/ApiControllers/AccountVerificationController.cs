@@ -17,7 +17,7 @@ namespace AuthenticationServer.Controllers
             authentication = _service;
         }
 
-        [HttpGet("{apiname}", Name ="verifyaccount")]
+        [HttpGet("verifyaccount")]
         public IActionResult VerifyAccount(string token)
         {
             authentication.VerifyAccount(token);
