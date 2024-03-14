@@ -52,7 +52,7 @@ namespace ResourceServer.Services.JwtTokenService
             long exp = long.Parse(ext);
             if (now > exp) return false;
             return true;
-        }
+        } 
     }
 }
 
