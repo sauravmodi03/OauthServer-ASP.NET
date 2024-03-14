@@ -42,6 +42,17 @@ namespace AuthServer.Services.JwtTokenService
         {
             return model.Claims.First(c => c.Type == claim).Value;
         }
+
+        public static bool IsTokenValid(string encodedToken)
+        {
+            var tokenModel = DecodeJwt(encodedToken);
+            //var iat = GetClaimValue(tokenModel, "iat");
+            var ext = GetClaimValue(tokenModel, "exp");
+            long now = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+            long exp = long.Parse(ext);
+            if (now > exp) return false;
+            return true;
+        }
     }
 }
 
