@@ -16,7 +16,7 @@ namespace AuthServer.Services.JwtTokenService
 
         public static string CreateToken(string email)
         {
-            var expiration = DateTime.UtcNow.AddMinutes(10);
+            var expiration = DateTime.UtcNow.AddMinutes(1);
             var token = CreateJwtToken(
                 CreateClaims(email),
                 CreateSigningCredentials(),
@@ -48,7 +48,7 @@ namespace AuthServer.Services.JwtTokenService
             {
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Iat, DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString()),
-                new Claim(ClaimTypes.Email, email),
+                new Claim(JwtRegisteredClaimNames.Aud, email)                
             };
 
                 return claims;

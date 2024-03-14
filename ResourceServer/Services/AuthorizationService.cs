@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using ResourceServer.Models;
 using ResourceServer.Services.JwtTokenService;
@@ -21,7 +22,7 @@ namespace ResourceServer.Services
 			if (!JwtDecoder.IsTokenValid(encodedJwt)) return false;
 
 			var decodedToken = JwtDecoder.DecodeJwt(encodedJwt);
-			var userEmail = JwtDecoder.GetClaimValue(decodedToken, ClaimTypes.Email);
+			var userEmail = JwtDecoder.GetClaimValue(decodedToken, JwtRegisteredClaimNames.Aud);
 
 			JwtToken token = jwtService.GetActiveTokenFromAuthServer(userEmail).Result;
 

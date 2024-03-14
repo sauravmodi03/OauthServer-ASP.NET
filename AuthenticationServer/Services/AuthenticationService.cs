@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using AuthenticationServer.Models;
 using AuthenticationServer.Repository;
@@ -74,7 +75,7 @@ namespace AuthenticationServer.Services
         public void VerifyAccount(string token)
         {
             JwtTokenModal decodedToken = JwtDecoder.DecodeJwt(token);
-            string email = JwtDecoder.GetClaimValue(decodedToken, ClaimTypes.Email);
+            string email = JwtDecoder.GetClaimValue(decodedToken, JwtRegisteredClaimNames.Aud);
             AccountVerification account = accountVerificationRepository.GetActiveTokenByEmail(email);
             if(account.TokenValid && account.Token.Equals(token))
             {

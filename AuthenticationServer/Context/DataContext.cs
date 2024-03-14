@@ -31,7 +31,6 @@ namespace AuthenticationServer
         public DbSet<User> Users { get; set; }
         public DbSet<AccountVerification> AccountVerifications { get; set; }
         public DbSet<AccessToken> AccessTokens { get; set; }
-        public DbSet<Todo> Todos { get; set; }
     }
 }
 
